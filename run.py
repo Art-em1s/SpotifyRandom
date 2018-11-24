@@ -5,8 +5,9 @@ try:
     print("Paste your token here: ")
     OAuth = input()
     OAuth = "Bearer {}".format(OAuth)
-    print("Paste your playlist ID here (Looks like '19HKxvUoA1kfuqO7PSWixz'): ")
+    print("Paste your playlist URL here: ")
     Playlist = input()
+    Playlist = Playlist.split("/")[6].split("?")[0]
     try:
         url = "https://api.spotify.com/v1/playlists/{}".format(Playlist)
         querystring = {"market":"GB"}
