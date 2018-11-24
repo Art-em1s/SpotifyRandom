@@ -10,12 +10,12 @@ try:
     while True:
         try:
             url = "https://api.spotify.com/v1/playlists/{}/tracks".format(Playlist)
-            x=rng().randrange(0, int(r["tracks"]["total"]/10))
+            x=rng().randrange(0, int(r["tracks"]["total"]))
             y=rng().randrange(0, 64)
             payload = {"range_start":1,"range_length":y,"insert_before":x}
             headers = {'Accept': "application/json",'Content-Type': "application/json",'Authorization': OAuth}
             a=requests.request("PUT", url, data=json.dumps(payload), headers=headers).json()
-            print("{} songs moved to {}-{}".format(x, y, y+x))
+            print("{} songs moved to {}-{}".format(y, x, x+y))
             time.sleep(5)
         except Exception as e:
             print("Error: {}\n{}".format(e, traceback.format_exc()))
