@@ -27,16 +27,13 @@ try:
             headers = {'Accept': "application/json",'Content-Type': "application/json",'Authorization': OAuth}
             r=requests.request("PUT", url, data=json.dumps(payload), headers=headers)
             json = json.loads(r.text)
-            if r.ok:
-                time.sleep(0.25)
-            else:
-                time.sleep(2)
+            time.sleep(0.25)
             if r.status_code == 403:
                 os.system('cls')
                 print("Error: {}".format(json['error']['message']))
                 break
             os.system('cls')
-            print("{}/{} | Status: {}\n \n{}".format(i,plc,r.status_code))
+            print("{} of {} songs randomised.".format(i,plc))
         except Exception as e:
             print(e)
             time.sleep(5)
