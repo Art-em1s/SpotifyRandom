@@ -1,8 +1,13 @@
-import asyncio, json, random, requests, time, traceback
-from auth import OAuth, Playlist
+import asyncio, json, random, requests, time, traceback, os
 rng = random.SystemRandom
 
+Playlist = "19HKxvUoA1kfuqO7PSWixz" #Update with playlist ID to match
+
 try:
+    print("Go here and get a OAuth Token: https://developer.spotify.com/console/put-playlist-tracks/")
+    print("Paste your token here: ")
+    OAuth = input()
+    OAuth = "Bearer {}".format(OAuth)
     url = "https://api.spotify.com/v1/playlists/{}".format(Playlist)
     querystring = {"market":"GB"}
     headers = {'Accept': "application/json",'Content-Type': "application/json",'Authorization': OAuth}
@@ -16,6 +21,8 @@ try:
             headers = {'Accept': "application/json",'Content-Type': "application/json",'Authorization': OAuth}
             a=requests.request("PUT", url, data=json.dumps(payload), headers=headers).json()
             time.sleep(0.2)
+            os.system('cls')
+            print("{}/{}".format(i,plc))
         except Exception as e:
             print("Error: {}\n{}".format(e, traceback.format_exc()))
             pass #prevents errors due to exceeding rate-limits
