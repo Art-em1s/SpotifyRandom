@@ -1,18 +1,21 @@
 import asyncio, json, random, requests, time, traceback, os
 rng = random.SystemRandom
-
-Playlist = "19HKxvUoA1kfuqO7PSWixz" #Update with playlist ID to match
-
 try:
     print("Go here and get a OAuth Token: https://developer.spotify.com/console/put-playlist-tracks/")
     print("Paste your token here: ")
     OAuth = input()
     OAuth = "Bearer {}".format(OAuth)
-    url = "https://api.spotify.com/v1/playlists/{}".format(Playlist)
-    querystring = {"market":"GB"}
-    headers = {'Accept': "application/json",'Content-Type': "application/json",'Authorization': OAuth}
-    r=requests.request("GET", url, headers=headers, params=querystring).json()
-    plc=int(r["tracks"]["total"])
+    print("Paste your playlist ID here (Looks like '19HKxvUoA1kfuqO7PSWixz'): ")
+    Playlist = input()
+    try:
+        url = "https://api.spotify.com/v1/playlists/{}".format(Playlist)
+        querystring = {"market":"GB"}
+        headers = {'Accept': "application/json",'Content-Type': "application/json",'Authorization': OAuth}
+        r=requests.request("GET", url, headers=headers, params=querystring).json()
+        plc=int(r["tracks"]["total"])
+    except:
+        print("Incorrect playlist/token information, check them and try again")
+        quit()
     for i in range(plc):
         try:
             url = "https://api.spotify.com/v1/playlists/{}/tracks".format(Playlist)
