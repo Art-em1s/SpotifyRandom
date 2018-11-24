@@ -1,2 +1,2 @@
-Client_ID = ""
-Client_Secret = ""
+Playlist = ""
+OAuth = ""
