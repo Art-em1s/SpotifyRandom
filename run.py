@@ -32,7 +32,6 @@ try:
             os.system('cls')
             print("{} of {} songs randomised.".format(i,plc))
         except Exception as e:
-            print("Error: {}\n{}".format(e, traceback.format_exc()))
             time.sleep(5)
             pass #prevents errors due to exceeding rate-limits
 except Exception as e:
